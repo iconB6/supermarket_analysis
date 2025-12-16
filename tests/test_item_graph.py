@@ -26,3 +26,25 @@ def test_add_transaction_with_single_item():
 
     assert "bread" not in graph.graph or graph.graph["bread"] == {}
 
+# Linear Search test
+def test_is_frequently_bought_linear_search():
+    """
+    Edge cases:
+    - frequent pair exists
+    - queried pair does not exist
+    """
+    graph = ItemGraph()
+    graph.add_transaction(["bread", "milk"])
+    graph.add_transaction(["bread", "milk"])
+
+    assert graph.is_frequently_bought("bread", "milk", threshold=2) is True
+    assert graph.is_frequently_bought("bread", "eggs", threshold=1) is False
+
+
+def test_is_frequently_bought_item_not_in_graph():
+    """
+    Edge case: querying items not present in the graph.
+    """
+    graph = ItemGraph()
+    assert graph.is_frequently_bought("bread", "milk", threshold=1) is False
+
