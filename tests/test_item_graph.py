@@ -72,3 +72,25 @@ def test_dfs_start_item_not_exist():
 
     assert related == set()
 
+# Merge sort test
+def test_get_top_co_purchased():
+    """
+    Normal case: ranking co-purchased items using merge sort.
+    """
+    graph = ItemGraph()
+    graph.add_transaction(["bread", "milk"])
+    graph.add_transaction(["bread", "eggs"])
+    graph.add_transaction(["bread", "milk"])
+
+    top = graph.get_top_co_purchased("bread", k=1)
+
+    assert top[0][0] == "milk"
+    assert top[0][1] == 2
+
+
+def test_get_top_co_purchased_item_not_exist():
+    """
+    Edge case: requesting top items for a non-existent product.
+    """
+    graph = ItemGraph()
+    assert graph.get_top_co_purchased("bread") == []
