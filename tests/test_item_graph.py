@@ -94,3 +94,20 @@ def test_get_top_co_purchased_item_not_exist():
     """
     graph = ItemGraph()
     assert graph.get_top_co_purchased("bread") == []
+
+# Recommendation-style query test
+def test_recommend_items_from_single_item():
+    """
+    Application-specific extension:
+    Recommend items likely to be bought with a given item.
+    """
+    graph = ItemGraph()
+    graph.add_transaction(["bread", "milk"])
+    graph.add_transaction(["bread", "butter"])
+    graph.add_transaction(["bread", "milk"])
+
+    recommendations = graph.recommend_items(["bread"], k=1)
+
+    assert recommendations[0][0] == "milk"
+    assert recommendations[0][1] == 2
+
