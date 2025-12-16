@@ -1,2 +1,5 @@
+
+
 class ItemGraph:
-    pass
+    def __init__(self):
+        self.graph = {}
