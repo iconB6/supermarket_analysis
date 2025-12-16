@@ -94,6 +94,31 @@ class ItemGraph:
         pairs = list(scores.items())
         sorted_pairs = self.merge_sort(pairs)
         return sorted_pairs[:k]
+    
+    # ---------- Quick Sort (for comparison only) ----------
+    def quick_sort(self, items):
+        if len(items) <= 1:
+            return items
+
+        pivot = items[len(items) // 2][1] 
+
+        left = []
+        middle = []
+        right = []
+
+        for item in items:
+            if item[1] > pivot:
+                left.append(item)
+            elif item[1] < pivot:
+                right.append(item)
+            else:
+                middle.append(item)
+
+        return (
+            self.quick_sort(left)
+            + middle
+            + self.quick_sort(right)
+        )
 
 
     
