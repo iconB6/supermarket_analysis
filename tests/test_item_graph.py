@@ -48,3 +48,27 @@ def test_is_frequently_bought_item_not_in_graph():
     graph = ItemGraph()
     assert graph.is_frequently_bought("bread", "milk", threshold=1) is False
 
+# DFS test
+def test_dfs_related_items():
+    """
+    Normal case: DFS should find indirectly related items.
+    """
+    graph = ItemGraph()
+    graph.add_transaction(["bread", "milk"])
+    graph.add_transaction(["milk", "butter"])
+
+    related = graph.dfs_related_items("bread")
+
+    assert "milk" in related
+    assert "butter" in related
+
+
+def test_dfs_start_item_not_exist():
+    """
+    Edge case: DFS start node does not exist.
+    """
+    graph = ItemGraph()
+    related = graph.dfs_related_items("bread")
+
+    assert related == set()
+
