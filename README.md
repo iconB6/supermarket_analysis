@@ -98,7 +98,7 @@ Key features of the visualisation:
 From the project root directory:
 
 ```bash
-python demo_recom_query.py
+python demo_visualization.py
 ```
 
 The resulting figure can be displayed or captured for inclusion in the report.
@@ -157,23 +157,52 @@ pytest
 
 ---
 
-## How to Reproduce Results
+### 🔹 Environment Setup
 
-1. Ensure Python 3 is installed
-2. Install required libraries:
+This project uses a small number of standard Python libraries.
+It is recommended to create a virtual environment before installing dependencies.
 
-   ```bash
-   pip install matplotlib networkx pytest
-   ```
-3. Run tests:
+#### 1. Create and activate a virtual environment (optional but recommended)
 
-   ```bash
-   pytest
-   ```
-4. Run the recommendation demo:
+```bash
+python -m venv venv
+```
 
-   ```bash
-   python scripts/demo_recommendation.py
-   ```
+**On Windows:**
 
+```bash
+venv\Scripts\activate
+```
+
+**On macOS / Linux:**
+
+```bash
+source venv/bin/activate
+```
+
+#### 2. Install dependencies using `requirements.txt`
+
+```bash
+pip install -r requirements.txt
+```
+
+#### 3. Run tests
+
+```bash
+pytest
+```
+
+#### 4. Run application demos
+
+Recommendation-style query:
+
+```bash
+python demo_recom_query.py
+```
+
+Item relationship visualisation:
+
+```bash
+python demo_visualization.py
+```
 ---
