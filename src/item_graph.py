@@ -22,4 +22,21 @@ class ItemGraph:
 
         return False
     
+    # DFS traversal for item association discovery
+    def dfs_related_items(self, start):
+        visited = set()
+
+        def dfs(item):
+            for neighbor in self.graph[item]:
+                if neighbor not in visited:
+                    visited.add(neighbor)
+                    dfs(neighbor)
+
+        if start not in self.graph:
+            return visited
+
+        dfs(start)
+        return visited
     
+
+
