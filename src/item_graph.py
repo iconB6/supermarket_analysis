@@ -38,5 +38,41 @@ class ItemGraph:
         dfs(start)
         return visited
     
+    # Merge sort ranking co-purchased items
+    def merge_sort(self, items):
+        if len(items) <= 1:
+            return items
+
+        mid = len(items) // 2
+        left = self.merge_sort(items[:mid])
+        right = self.merge_sort(items[mid:])
+
+        return self._merge(left, right)
+
+    def _merge(self, left, right):
+        result = []
+        i = j = 0
+
+        while i < len(left) and j < len(right):
+            if left[i][1] >= right[j][1]:
+                result.append(left[i])
+                i += 1
+            else:
+                result.append(right[j])
+                j += 1
+
+        result.extend(left[i:])
+        result.extend(right[j:])
+        return result
+
+    def get_top_co_purchased(self, item, k=3):
+        if item not in self.graph:
+            return []
+
+        pairs = list(self.graph[item].items())
+        sorted_pairs = self.merge_sort(pairs)
+        return sorted_pairs[:k]
+
+    
 
 
