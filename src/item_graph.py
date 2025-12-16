@@ -72,6 +72,29 @@ class ItemGraph:
         pairs = list(self.graph[item].items())
         sorted_pairs = self.merge_sort(pairs)
         return sorted_pairs[:k]
+    
+    # Recommendation-style query
+    def recommend_items(self, basket, k=3):
+        """
+        Recommend items likely to be bought together with the given basket.
+        """
+        scores = defaultdict(int)
+
+        for item in basket:
+            if item not in self.graph:
+                continue
+
+            for neighbor, freq in self.graph[item].items():
+                if neighbor not in basket:
+                    scores[neighbor] += freq  # linear accumulation
+
+        if not scores:
+            return []
+
+        pairs = list(scores.items())
+        sorted_pairs = self.merge_sort(pairs)
+        return sorted_pairs[:k]
+
 
     
 
